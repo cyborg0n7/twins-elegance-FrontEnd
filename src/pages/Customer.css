@@ -1,0 +1,258 @@
+.customer-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.customer-card {
+  background: #E8DDD0;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(107, 91, 74, 0.12);
+  padding: 2.5rem;
+}
+
+.customer-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.customer-tab {
+  padding: 0.75rem 1.75rem;
+  border-radius: 999px;
+  border: 1px solid #D4C4B0;
+  background: #F5F1EB;
+  color: #6B5B4A;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.customer-tab.active {
+  background: linear-gradient(135deg, #C9A961, #A68B5B);
+  color: #FAF8F3;
+  border-color: transparent;
+}
+
+.customer-form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.customer-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.customer-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #4A3F35;
+}
+
+.customer-form input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 1px solid #D4C4B0;
+  background: #F5F1EB;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.customer-form input:focus {
+  outline: none;
+  border-color: #C9A961;
+  box-shadow: 0 0 0 4px rgba(201, 169, 97, 0.15);
+  background: #FAF8F3;
+}
+
+.customer-form input.error {
+  border-color: #c0392b;
+  background: rgba(255, 107, 107, 0.08);
+}
+
+.customer-form input.error:focus {
+  border-color: #c0392b;
+  box-shadow: 0 0 0 4px rgba(192, 57, 43, 0.15);
+}
+
+.field-error {
+  display: block;
+  color: #c0392b;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+.password-input-wrapper {
+  position: relative;
+}
+
+.password-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-container input {
+  padding-right: 3rem;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6B5B4A;
+  transition: transform 0.2s ease;
+  z-index: 1;
+}
+
+.password-toggle:hover {
+  transform: scale(1.1);
+}
+
+.password-toggle:focus {
+  outline: 2px solid #C9A961;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.customer-form button {
+  padding: 1rem;
+  background: linear-gradient(135deg, #C9A961, #A68B5B);
+  color: #FAF8F3;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.customer-form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(201, 169, 97, 0.4);
+}
+
+.customer-error {
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  background: rgba(255, 107, 107, 0.12);
+  color: #c0392b;
+}
+
+.customer-success {
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  background: rgba(76, 175, 80, 0.12);
+  color: #2e7d32;
+}
+
+.account-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.orders-list {
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.order-card {
+  border: 1px solid #D4C4B0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  background: rgba(201, 169, 97, 0.1);
+}
+
+.order-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: #4A3F35;
+}
+
+.order-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.order-items {
+  border-top: 1px solid #D4C4B0;
+  padding-top: 1rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+  color: #444;
+  padding: 0.75rem;
+  background: #F5F1EB;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.order-item-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.order-item-details {
+  flex: 1;
+  font-weight: 500;
+}
+
+.order-item-price {
+  font-weight: 600;
+  color: #C9A961;
+}
+
+.order-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #6B5B4A;
+  border: 1px dashed #D4C4B0;
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .customer-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .customer-card {
+    padding: 1.75rem;
+  }
+
+  .customer-tabs {
+    flex-direction: column;
+  }
+
+  .order-meta {
+    flex-direction: column;
+  }
+}
+
