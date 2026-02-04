@@ -91,17 +91,21 @@ export const fetchCustomerOrders = async (token) => {
 };
 
 // --- ADMIN AUTH (Mock) ---
-
 export const loginAdmin = async (email, password) => {
   await mockDelay();
-  if (email === 'admin@twins.com' && password === 'admin') {
-    return mockSuccess({
-      message: 'Connexion Admin réussie',
-      token: 'mock-admin-token',
-      user: { name: 'Admin', role: 'admin' }
-    });
+  // Hardcoded check for frontend-only auth
+  if (email === 'admin@twins-elegance.com' && password === 'Admin@2025') {
+    return {
+      success: true,
+      token: 'mock-admin-token-' + Date.now(),
+      admin: { id: 1, email: 'admin@twins-elegance.com' }
+    };
   }
-  return null; // Let it fall through to customer login or handle error
+
+  return {
+    success: false,
+    message: 'Email ou mot de passe incorrect'
+  };
 };
 
 // --- PRODUCTS ---

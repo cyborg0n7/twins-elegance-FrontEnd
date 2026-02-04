@@ -82,7 +82,7 @@ const CustomerAuth = () => {
     setIsSubmitting(true);
 
     // Unified Login Logic
-    if (loginForm.email.trim().toLowerCase() === 'admin@twins.com') {
+    if (loginForm.email.trim().toLowerCase() === 'admin@twins.com' || loginForm.email.trim().toLowerCase() === 'admin@twins-elegance.com') {
       try {
         const adminResult = await adminLogin({
           email: loginForm.email.trim(),

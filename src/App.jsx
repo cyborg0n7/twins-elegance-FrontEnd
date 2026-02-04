@@ -53,9 +53,9 @@ function App() {
                 </main>
               </div>
             </Router>
-        </CartProvider>
-      </CustomerProvider>
-    </AdminProvider>
+          </CartProvider>
+        </CustomerProvider>
+      </AdminProvider>
     </ProductProvider>
   );
 }
