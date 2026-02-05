@@ -8,19 +8,19 @@ const ADMIN_TOKEN_KEY = 'twins_elegance_admin_token';
 
 export const AdminProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    const stored = localStorage.getItem(ADMIN_STORAGE_KEY);
+    const stored = sessionStorage.getItem(ADMIN_STORAGE_KEY);
     return stored === 'true';
   });
   const [token, setToken] = useState(() => {
-    return localStorage.getItem(ADMIN_TOKEN_KEY) || null;
+    return sessionStorage.getItem(ADMIN_TOKEN_KEY) || null;
   });
 
   useEffect(() => {
-    localStorage.setItem(ADMIN_STORAGE_KEY, String(isAuthenticated));
+    sessionStorage.setItem(ADMIN_STORAGE_KEY, String(isAuthenticated));
     if (token) {
-      localStorage.setItem(ADMIN_TOKEN_KEY, token);
+      sessionStorage.setItem(ADMIN_TOKEN_KEY, token);
     } else {
-      localStorage.removeItem(ADMIN_TOKEN_KEY);
+      sessionStorage.removeItem(ADMIN_TOKEN_KEY);
     }
   }, [isAuthenticated, token]);
 

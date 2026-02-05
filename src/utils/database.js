@@ -129,6 +129,16 @@ export const deleteCustomer = (email) => {
   return filtered;
 };
 
+export const deleteAllProducts = () => {
+  writeToStorage(PRODUCTS_KEY, []);
+  return [];
+};
+
+export const deleteAllCustomers = () => {
+  writeToStorage(CUSTOMERS_KEY, []);
+  return [];
+};
+
 export const clearDatabase = () => {
   localStorage.removeItem(ORDERS_KEY);
   localStorage.removeItem(CUSTOMERS_KEY);

@@ -8,7 +8,9 @@ import {
   getProducts,
   addProduct as addProductToDb,
   deleteProduct as deleteProductFromDb,
-  updateProduct as updateProductInDb
+  updateProduct as updateProductInDb,
+  deleteAllProducts,
+  deleteAllCustomers
 } from '../utils/database';
 import { categories as defaultCategories } from '../data/products';
 import ConfirmationModal from '../components/ConfirmationModal';
@@ -128,6 +130,30 @@ const AdminDashboard = () => {
     setRefreshKey(prev => prev + 1);
   };
 
+  const handleDeleteAllProducts = () => {
+    setModalState({
+      isOpen: true,
+      title: 'Tout supprimer',
+      message: 'Êtes-vous sûr de vouloir supprimer TOUS les produits ? Cette action est irréversible.',
+      onConfirm: () => {
+        deleteAllProducts();
+        setRefreshKey((prev) => prev + 1);
+      }
+    });
+  };
+
+  const handleDeleteAllCustomers = () => {
+    setModalState({
+      isOpen: true,
+      title: 'Tout supprimer',
+      message: 'Êtes-vous sûr de vouloir supprimer TOUS les clients ? Cette action est irréversible.',
+      onConfirm: () => {
+        deleteAllCustomers();
+        setRefreshKey((prev) => prev + 1);
+      }
+    });
+  };
+
   const handleDeleteCustomer = (email) => {
     setModalState({
       isOpen: true,
@@ -157,7 +183,7 @@ const AdminDashboard = () => {
   );
 
   return (
-    <div className="min-h-screen bg-cream-light pt-32 px-4 pb-20">
+    <div className="min-h-screen bg-cream-light pt-24 px-4 pb-20">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
@@ -167,12 +193,7 @@ const AdminDashboard = () => {
             <p className="text-luxury-muted">Bienvenue, {adminInfo?.email || 'Administrateur'}</p>
           </div>
           <div className="flex gap-4">
-            <button
-              onClick={() => setRefreshKey((prev) => prev + 1)}
-              className="px-6 py-2 bg-white text-luxury-black border border-luxury-muted/30 rounded-full hover:bg-gold hover:text-white transition-all shadow-sm"
-            >
-              Actualiser
-            </button>
+
             <button
               onClick={logout}
               className="px-6 py-2 bg-red-50 text-red-500 border border-red-100 rounded-full hover:bg-red-500 hover:text-white transition-all shadow-sm"
@@ -286,42 +307,54 @@ const AdminDashboard = () => {
 
           {/* CUSTOMERS TAB */}
           {selectedTab === 'customers' && (
-            <div className="overflow-x-auto">
+            <div className="space-y-6">
+              <div className="flex justify-between items-center bg-white/40 p-4 rounded-xl border border-gold/10">
+                <h2 className="text-xl font-serif text-luxury-black">Gestion des Clients</h2>
+                <button
+                  onClick={handleDeleteAllCustomers}
+                  className="px-4 py-2 border border-luxury-black/30 text-luxury-black rounded-md hover:border-red-500 hover:text-red-600 hover:bg-red-50 transition-all duration-300 text-sm font-serif"
+                >
+                  Tout supprimer
+                </button>
+              </div>
+
               {customers.length > 0 ? (
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr className="text-luxury-secondary font-serif border-b border-gold/20">
-                      <th className="p-4">Client</th>
-                      <th className="p-4">Contact</th>
-                      <th className="p-4">Localisation</th>
-                      <th className="p-4 text-right">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gold/10">
-                    {customers.map(customer => (
-                      <tr key={customer.email} className="hover:bg-gold/5 transition-colors">
-                        <td className="p-4 font-medium text-luxury-black">
-                          {customer.firstName} {customer.lastName}
-                        </td>
-                        <td className="p-4 text-sm text-luxury-secondary">
-                          <p>{customer.email}</p>
-                          <p>{customer.phone}</p>
-                        </td>
-                        <td className="p-4 text-sm text-luxury-muted">
-                          {customer.city}, {customer.country || 'Maroc'}
-                        </td>
-                        <td className="p-4 text-right">
-                          <button
-                            onClick={() => handleDeleteCustomer(customer.email)}
-                            className="px-3 py-1 bg-red-50 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-colors text-xs font-bold"
-                          >
-                            Supprimer
-                          </button>
-                        </td>
+                <div className="overflow-x-auto rounded-xl border border-gold/10 bg-white">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="text-luxury-secondary font-serif border-b border-gold/20">
+                        <th className="p-4">Client</th>
+                        <th className="p-4">Contact</th>
+                        <th className="p-4">Localisation</th>
+                        <th className="p-4 text-right">Actions</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody className="divide-y divide-gold/10">
+                      {customers.map(customer => (
+                        <tr key={customer.email} className="hover:bg-gold/5 transition-colors">
+                          <td className="p-4 font-medium text-luxury-black">
+                            {customer.firstName} {customer.lastName}
+                          </td>
+                          <td className="p-4 text-sm text-luxury-secondary">
+                            <p>{customer.email}</p>
+                            <p>{customer.phone}</p>
+                          </td>
+                          <td className="p-4 text-sm text-luxury-muted">
+                            {customer.city}, {customer.country || 'Maroc'}
+                          </td>
+                          <td className="p-4 text-right">
+                            <button
+                              onClick={() => handleDeleteCustomer(customer.email)}
+                              className="px-3 py-1 bg-red-50 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-colors text-xs font-bold"
+                            >
+                              Supprimer
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               ) : (
                 <p className="text-center text-luxury-muted py-10">Aucun client enregistré.</p>
               )}
@@ -333,12 +366,20 @@ const AdminDashboard = () => {
             <div className="space-y-6">
               <div className="flex justify-between items-center bg-white/40 p-4 rounded-xl border border-gold/10">
                 <h2 className="text-xl font-serif text-luxury-black">Gestion du Catalogue</h2>
-                <button
-                  onClick={() => setShowAddProductForm(!showAddProductForm)}
-                  className="bg-luxury-black text-gold px-6 py-2 rounded-md hover:bg-gold hover:text-white transition-colors shadow-lg"
-                >
-                  {showAddProductForm ? 'Fermer' : 'Ajouter un Produit'}
-                </button>
+                <div className="flex gap-4">
+                  <button
+                    onClick={handleDeleteAllProducts}
+                    className="px-4 py-2 border border-luxury-black/30 text-luxury-black rounded-md hover:border-red-500 hover:text-red-600 hover:bg-red-50 transition-all duration-300 text-sm font-serif group flex items-center gap-2"
+                  >
+                    <span>Tout supprimer</span>
+                  </button>
+                  <button
+                    onClick={() => setShowAddProductForm(!showAddProductForm)}
+                    className="bg-luxury-black text-gold px-6 py-2 rounded-md hover:bg-gold hover:text-white transition-colors shadow-lg"
+                  >
+                    {showAddProductForm ? 'Fermer' : 'Ajouter un Produit'}
+                  </button>
+                </div>
               </div>
 
               {showAddProductForm && (
