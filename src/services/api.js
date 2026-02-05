@@ -112,14 +112,9 @@ export const loginAdmin = async (email, password) => {
 
 export const getProducts = async () => {
   // Try local storage first, else use default data
-  let products = getLocalProducts();
-  if (!products || products.length === 0) {
-    products = initializeProducts(defaultProducts);
-  }
-  return products; // Return array directly as expected by some components, or wrapper? 
-  // Looking at Home.jsx usage: const { products } = useProducts()... useProducts uses Context which calls database directly actually?
-  // Wait, ProductContext imports from ../utils/database directly. 
-  // This api.js getProducts might be used by Admin or other fetches.
+  // initializeProducts now safely checks for key existence (checking if null)
+  // so it won't overwrite an intentional empty list.
+  const products = initializeProducts(defaultProducts);
   return { data: products };
 };
 

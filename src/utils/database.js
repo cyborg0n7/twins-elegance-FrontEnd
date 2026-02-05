@@ -74,13 +74,14 @@ export const getProducts = () => {
 };
 
 export const initializeProducts = (defaultProducts) => {
-  // Only initialize if storage is empty to preserve changes
-  const existing = getProducts();
-  if (!existing || existing.length === 0) {
+  // Only initialize if the key doesn't exist at all.
+  // If it exists (even if '[]'), we respect the user's deletion.
+  const raw = localStorage.getItem(PRODUCTS_KEY);
+  if (raw === null) {
     writeToStorage(PRODUCTS_KEY, defaultProducts);
     return defaultProducts;
   }
-  return existing;
+  return getProducts();
 };
 
 export const addProduct = (product) => {
